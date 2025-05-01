@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat XMPP</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://cdn.jsdelivr.net/npm/strophe/strophe.min.js"></script>
+  <script src="js/lib/strophe.debug.js"></script>
+  <script type="module" src="js/index.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2><i class="bi bi-chat-dots"></i> XMPP Chat</h2>
+      <div class="status-indicator">
+        <div id="status-dot" class="status-dot disconnected"></div>
+        <span id="status-text">Desconectado</span>
+      </div>
+    </div>
+    
+    <!-- Login Panel -->
+    <div id="login-panel" class="login-panel">
+      <form id="login-form" onsubmit="event.preventDefault(); connect();">
+        <div class="form-group">
+          <label for="jid"><i class="bi bi-person-fill"></i> JID:</label>
+          <input type="text" id="jid" class="form-control" placeholder="usuario@xmpp.jp" autocomplete="username">
+        </div>
+        
+        <div class="form-group">
+          <label for="pass"><i class="bi bi-key-fill"></i> Senha:</label>
+          <input type="password" id="pass" class="form-control" placeholder="Sua senha" autocomplete="current-password">
+        </div>
+        
+        <div class="form-group remember-me">
+          <label>
+            <input type="checkbox" id="remember-me"> Lembrar-me neste dispositivo
+          </label>
+        </div>
+        
+        <button type="submit" id="connect-btn" class="btn">
+          <i class="bi bi-box-arrow-in-right"></i> Conectar
+        </button>
+      </form>
+    </div>
+    
+    <!-- Main Panel (Contact List & Chat) -->
+    <div id="main-panel" class="main-panel hidden">
+      <!-- Botão de toggle da sidebar (apenas visível em mobile) -->
+      <button id="toggle-sidebar" class="toggle-sidebar-btn" aria-label="Toggle Sidebar">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <!-- Sidebar (Contatos) -->
+      <div class="sidebar">
+        <div class="user-profile">
+          <div class="avatar" id="user-avatar">?</div>
+          <div class="user-info">
+            <div class="user-name" id="user-name">...</div>
+            <div class="user-status">
+              <span id="connection-status">Desconectado</span>
+            </div>
+          </div>
+          <div class="user-actions">
+            <button class="btn btn-sm" id="add-contact-btn" title="Adicionar contato">
+              <i class="bi bi-person-plus-fill"></i>
+            </button>
+            <button class="btn btn-sm" id="disconnect-btn" title="Desconectar">
+              <i class="bi bi-box-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="search-bar">
+          <input type="text" class="search-input" id="contact-search" placeholder="Pesquisar contatos...">
+        </div>
+
+        <div class="contact-list" id="contact-list">
+          <!-- Contatos serão adicionados dinamicamente -->
+        </div>
+      </div>
+
+      <!-- Área de Chat -->
+      <div class="chat-area">
+        <!-- Tela de boas-vindas (quando nenhum contato está selecionado) -->
+        <div id="welcome-screen" class="welcome-message">
+          <i class="bi bi-chat-text" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+          <h2>Bem-vindo ao XMPP Chat</h2>
+          <p>Selecione um contato para iniciar uma conversa</p>
+        </div>
+
+        <!-- Container de chat (inicialmente oculto) -->
+        <div id="chat-container" class="chat-container hidden">
+          <div class="chat-header">
+            <div class="avatar" id="recipient-avatar">?</div>
+            <div>
+              <div class="contact-name" id="recipient-name">Contato</div>
+              <div class="contact-presence" id="recipient-presence">Offline</div>
+            </div>
+          </div>
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="message-input-container">
+            <button class="file-upload-btn" id="file-upload-btn"><i class="bi bi-paperclip"></i></button>
+            <input type="file" id="file-upload" style="display:none">
+            <div class="message-input">
+              <input type="text" id="msg" placeholder="Digite uma mensagem..." disabled>
+            </div>
+            <button class="btn" id="send-btn" disabled><i class="bi bi-send"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- Add Contact Modal -->
+<div id="add-contact-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Adicionar Contato</h3>
+      <span class="close-modal" id="close-contact-modal">&times;</span>
+    </div>
+    <div class="form-group">
+      <label for="new-contact">JID do contato:</label>
+      <input type="text" id="new-contact" class="form-control" placeholder="amigo@xmpp.jp">
+    </div>
+    <div class="modal-buttons">
+      <button class="btn btn-outline" id="cancel-add-contact">Cancelar</button>
+      <button class="btn" id="confirm-add-contact">Adicionar</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

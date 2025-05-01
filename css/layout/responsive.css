@@ -1,0 +1,56 @@
+@media (max-width: 991px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .main-panel {
+    height: calc(100vh - 120px);
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    height: 100vh;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .sidebar.visible {
+    left: 0;
+  }
+  
+  .main-panel {
+    flex-direction: column;
+  }
+  
+  .chat-area {
+    width: 100%;
+  }
+  
+  .message {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px;
+  }
+  
+  .header h2 {
+    font-size: 18px;
+  }
+  
+  .message {
+    max-width: 90%;
+  }
+  
+  .modal-content {
+    width: 95%;
+    margin: 10% auto;
+  }
+}

@@ -1,0 +1,38 @@
+/* No início do arquivo, adicione ou atualize as variáveis CSS */
+
+:root {
+  --primary-color: #075E54;
+  --secondary-color: #128C7E;
+  --accent-color: #25D366;
+  --light-color: #DCF8C6;
+  --text-color: #333;
+  --border-color: #ddd;
+  --border-radius: 8px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --success-color: #25D366;
+  --error-color: #FF5252;
+  --warning-color: #FFC107;
+  --info-color: #2196F3;
+  --offline-color: #bbb;
+  --sidebar-width: 300px;
+}
+
+/* Base */
+@import 'base/variables.css';
+@import 'base/reset.css';
+@import 'base/typography.css';
+
+/* Componentes */
+@import 'components/buttons.css';
+@import 'components/forms.css';
+@import 'components/contacts.css';
+@import 'components/modals.css';
+@import 'components/file-upload.css';
+
+/* Layout */
+@import 'layout/header.css';
+@import 'layout/sidebar.css';
+@import 'layout/chat-area.css';
+@import 'layout/responsive.css';

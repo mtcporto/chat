@@ -1,0 +1,770 @@
+:root {
+  --primary-color: #128c7e;
+  --secondary-color: #128C7E;
+  --accent-color: #25D366;
+  --light-color: #DCF8C6;
+  --text-color: #333;
+  --border-color: #ddd;
+  --border-radius: 8px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --success-color: #25D366;
+  --error-color: #FF5252;
+  --warning-color: #FFC107;
+  --info-color: #2196F3;
+  --offline-color: #bbb;
+  --sidebar-width: 300px;
+}
+
+/* Reset e estilos básicos */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: #f0f2f5;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Layout principal */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  padding: 15px;
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  font-weight: 500;
+}
+
+.login-panel {
+  margin: auto;
+  max-width: 400px;
+  padding: 20px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+}
+
+.main-panel {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  background-color: #e5ddd5;
+}
+
+/* UI de contatos */
+.user-profile {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  background-color: #f0f2f5;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-bar {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  background-color: #f0f2f5;
+}
+
+.contact-list {
+  flex: 1;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.contact-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.contact-item.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.contact-item.unread {
+  font-weight: bold;
+  background-color: #e8f5e9;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-right: 10px;
+  position: relative;
+}
+
+.contact-status {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.contact-status.online {
+  background-color: var(--success-color);
+}
+
+.contact-status.offline {
+  background-color: var(--offline-color);
+}
+
+.contact-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.contact-name {
+  font-weight: 500;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-presence {
+  font-size: 12px;
+  color: #777;
+}
+
+.badge {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Estilo para o menu de contatos */
+.contact-menu {
+  position: relative;
+  margin-left: auto;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.contact-item:hover .contact-menu {
+  opacity: 1;
+}
+
+.contact-menu-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 10;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.contact-menu-dropdown.show {
+  display: block;
+}
+
+.contact-menu-dropdown a {
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  color: #333;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.contact-menu-dropdown a:hover {
+  background-color: #f5f5f5;
+}
+
+.contact-menu-dropdown i {
+  margin-right: 8px;
+}
+
+/* Área de chat */
+.chat-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 10px 15px;
+  background-color: #f0f2f5;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  background-color: #e5ddd5;
+}
+
+.message {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message.sent {
+  align-items: flex-end;
+}
+
+.message.received {
+  align-items: flex-start;
+}
+
+.message-bubble {
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.sent .message-bubble {
+  background-color: var(--light-color);
+}
+
+.received .message-bubble {
+  background-color: white;
+}
+
+.message-time {
+  font-size: 11px;
+  color: #999;
+  margin-top: 2px;
+}
+
+.system-message {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 12px;
+  color: #777;
+}
+
+.typing-indicator {
+  font-size: 12px;
+  color: #777;
+  padding: 5px 15px;
+  font-style: italic;
+}
+
+.message-input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f2f5;
+  border-top: 1px solid var(--border-color);
+}
+
+.message-input {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.message-input input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 15px;
+}
+
+.welcome-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #666;
+  background-color: #f8f9fa;
+}
+
+/* Botões */
+.btn {
+  padding: 10px 15px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.file-upload-btn {
+  padding: 8px;
+  margin-right: 5px;
+  background: none;
+  color: var(--primary-color);
+  border: none;
+}
+
+/* Formulários */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+}
+
+.remember-me label {
+  margin-bottom: 0;
+  margin-left: 6px;
+  font-weight: normal;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  margin: 10% auto;
+  padding: 20px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.close-modal {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+/* Utilitários */
+.hidden {
+  display: none !important;
+}
+
+.sidebar-footer {
+  padding: 10px;
+  background-color: #f0f2f5;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Fixar a área de input no fundo */
+.message-input-container {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  z-index: 100;
+  padding: 8px;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+/* Adicionar espaço extra no final da área de mensagens */
+.chat-messages {
+  padding-bottom: 70px !important;
+  margin-bottom: 10px;
+}
+
+/* Garantir que o container de chat permita scroll correto */
+.chat-container {
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Melhorar a altura do input */
+#msg {
+  height: 40px;
+}
+
+/* Estilos para arquivos */
+.file-message {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  width: fit-content;
+  max-width: 70%;
+}
+
+.file-icon {
+  font-size: 32px;
+  margin-right: 10px;
+  color: #4285f4;
+}
+
+.file-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-name {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 2px;
+  word-break: break-all;
+}
+
+.file-size {
+  font-size: 12px;
+  color: #888;
+}
+
+.file-download {
+  margin-top: 5px;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 13px;
+  display: inline-block;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .main-panel {
+    position: relative;
+  }
+  
+  .sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.visible {
+    transform: translateX(0);
+  }
+  
+  .sidebar-collapsed .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar-collapsed .chat-area {
+    margin-left: 0;
+  }
+}
+
+/* Adicione/modifique estas regras para garantir que o toggle funcione corretamente */
+
+/* Botão de toggle da sidebar */
+#toggle-sidebar {
+  display: none; /* Oculto por padrão em telas grandes */
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 100;
+}
+
+#toggle-sidebar:hover {
+  opacity: 0.8;
+}
+
+#toggle-sidebar:focus {
+  outline: none;
+}
+
+/* Comportamento responsivo */
+@media (max-width: 768px) {
+  #toggle-sidebar {
+    display: block; /* Visível em telas pequenas */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  
+  .sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 90;
+    width: 85%;
+    max-width: 300px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: none;
+  }
+  
+  .sidebar.visible {
+    transform: translateX(0);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .main-panel {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  /* Garantir que cliques acontecem corretamente */
+  #toggle-sidebar {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+}
+
+/* Animações suaves para todos os dispositivos */
+.sidebar {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.main-panel {
+  transition: margin-left 0.3s ease;
+}
+
+/* Adicione estas regras para corrigir o layout em desktops */
+
+/* Layout específico para desktop */
+.desktop .main-panel {
+  flex-direction: row; /* Layout horizontal em desktops */
+}
+
+.desktop .sidebar {
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
+  position: relative;
+  transition: none; /* Remover transições em desktop */
+  transform: none !important; /* Impedir transformações */
+}
+
+.desktop .chat-area {
+  flex: 1;
+  width: calc(100% - 300px);
+}
+
+.desktop #toggle-sidebar {
+  display: none !important; /* Nunca mostrar toggle em desktop */
+}
+
+/* Garantir que a barra lateral esteja sempre visível em desktop */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: translateX(0) !important;
+    position: relative;
+    box-shadow: none;
+  }
+  
+  .sidebar-collapsed .sidebar {
+    transform: translateX(0) !important;
+  }
+  
+  .main-panel {
+    margin-left: 0;
+  }
+  
+  .chat-area {
+    flex: 1;
+  }
+  
+  /* Estilizações do indexold para desktop */
+  .contact-item {
+    transition: background-color 0.2s;
+    cursor: pointer;
+    padding: 10px 15px;
+  }
+  
+  .contact-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .contact-item.active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Melhorias visuais para desktop */
+  .chat-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+  }
+  
+  .message-input-container {
+    height: 60px;
+    padding: 10px 15px;
+  }
+}
+
+/* Garantir que o layout móvel funcione bem */
+@media (max-width: 768px) {
+  .mobile .sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 90;
+    width: 85%;
+    max-width: 300px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: none;
+  }
+  
+  .mobile .sidebar.visible {
+    transform: translateX(0);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .mobile #toggle-sidebar {
+    display: block;
+  }
+  
+  .mobile .main-panel {
+    width: 100%;
+  }
+}
+
+/* Ajustes para o modal em todos os dispositivos */
+.modal-content {
+  width: 90%;
+  max-width: 400px;
+  margin: 10% auto;
+}

@@ -1,0 +1,108 @@
+.message {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 65%;
+  animation: fadeIn 0.3s;
+}
+
+.message.received {
+  align-self: flex-start;
+}
+
+.message.sent {
+  align-self: flex-end;
+}
+
+.message-bubble {
+  padding: 8px 12px;
+  border-radius: 8px;
+  position: relative;
+  word-break: break-word;
+  box-shadow: var(--shadow-sm);
+}
+
+.message.received .message-bubble {
+  background-color: white;
+  border-top-left-radius: 0;
+}
+
+.message.sent .message-bubble {
+  background-color: #dcf8c6;
+  border-top-right-radius: 0;
+}
+
+.message-header {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 2px;
+}
+
+.message-body {
+  font-size: 14px;
+}
+
+.message-time {
+  font-size: 11px;
+  color: #999;
+  margin-top: 2px;
+  align-self: flex-end;
+}
+
+.system-message {
+  text-align: center;
+  color: #ffffff;
+  margin: 10px 0;
+  font-style: italic;
+  font-size: 12px;
+  background-color: var(--system-message-color);
+  padding: 5px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 5px auto;
+  max-width: 80%;
+  align-self: center;
+}
+
+/* Estilos para o indicador de digitação */
+.typing-indicator {
+  font-style: italic;
+  color: #777;
+  font-size: 12px;
+  padding: 5px 15px;
+  height: 20px;
+}
+
+/* File Messages */
+.file-message {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0,0,0,0.05);
+  padding: 5px;
+  border-radius: 4px;
+  margin: 5px 0;
+}
+
+.file-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: var(--primary-color);
+}
+
+.file-info {
+  flex: 1;
+}
+
+.file-name {
+  font-weight: 500;
+}
+
+.file-size {
+  font-size: 12px;
+  color: #666;
+}
+
+.file-download {
+  color: var(--primary-color);
+  cursor: pointer;
+}
